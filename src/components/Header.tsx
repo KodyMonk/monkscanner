@@ -26,11 +26,11 @@ export default function Header() {
           <Image
             src="/monkscanner-logo-v2.svg"
             alt="MonkScanner logo"
-            width={240}
-            height={70}
-            priority
-            className="h-14 w-auto md:h-16"
-          />
+  width={240}
+  height={70}
+  priority
+  className="h-14 w-auto md:h-16"
+/>
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
