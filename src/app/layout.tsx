@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/monkscanner-favicon.ico",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -68,39 +68,44 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8819466786183780"
+          crossOrigin="anonymous"
+        />
+      </head>
+
       <body>
-        <Script
-  async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8819466786183780"
-  crossOrigin="anonymous"
-  strategy="afterInteractive"
-/>
         <Script id="clarity" strategy="afterInteractive">
-{`
+          {`
 (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "whqsnr56hz");
 `}
-</Script>
-        <Script
-  src="https://www.googletagmanager.com/gtag/js?id=G-QD5DRMS9C3"
-  strategy="afterInteractive"
-/>
+        </Script>
 
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QD5DRMS9C3');
-  `}
-</Script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QD5DRMS9C3"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-QD5DRMS9C3');
+`}
+        </Script>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+
         {children}
       </body>
     </html>
