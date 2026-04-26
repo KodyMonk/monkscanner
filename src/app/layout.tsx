@@ -69,6 +69,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8819466786183780"
+  crossOrigin="anonymous"
+  strategy="afterInteractive"
+/>
         <Script id="clarity" strategy="afterInteractive">
 {`
 (function(c,l,a,r,i,t,y){

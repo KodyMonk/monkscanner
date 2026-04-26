@@ -3,6 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBar from "@/components/TrustBar";
 import SEOContent from "@/components/SEOContent";
+import AdUnit from "@/components/AdUnit";
+
+
 
 export default function Home() {
   return (
@@ -25,12 +28,13 @@ export default function Home() {
             with no sign-up and no watermark.
           </p>
         </div>
+        <AdUnit slot="1234567890" className="my-6" />
 
         <QRGenerator />
         <TrustBar />
         <SEOContent />
       </section>
-
+<AdUnit slot="1234567891" className="my-10" />
       <Footer />
     </main>
   );

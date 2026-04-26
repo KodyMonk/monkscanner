@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import QRGenerator from "@/components/QRGenerator";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
+import AdUnit from "@/components/AdUnit";
 const relatedLinks = [
   {
     title: "Free QR Code Generator",
@@ -59,7 +59,7 @@ export default function BlogPage({
           <p className="mb-3 text-sm font-bold uppercase tracking-wide text-yellow-600">
             QR Code Guide
           </p>
-
+      <AdUnit slot="1234567893" className="my-8" />
           <h1 className="text-4xl font-black leading-tight md:text-5xl">
             {title}
           </h1>
