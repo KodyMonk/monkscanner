@@ -24,13 +24,13 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
           <Image
-            src="/monkscanner-logo-v2.svg"
-            alt="MonkScanner logo"
-  width={240}
-  height={70}
+  src="/monkscanner-logo.png?v=3"
+  alt="MonkScanner logo"
+  width={220}
+  height={60}
   priority
-  className="h-14 w-auto md:h-16"
-/>
+  className="h-10 w-auto md:h-12"
+/>   
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
