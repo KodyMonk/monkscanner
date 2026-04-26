@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Free QR Code Generator Online | Create Custom QR Codes | MonkScanner",
@@ -68,6 +69,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script
+  src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+  strategy="afterInteractive"
+/>
+
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  `}
+</Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
