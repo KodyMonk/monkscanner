@@ -20,25 +20,33 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#060b10] text-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05080d]/95 text-white backdrop-blur-xl">
+      <div className="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="flex items-center"
+        >
           <Image
-  src="/monkscanner-logo.png?v=3"
-  alt="MonkScanner logo"
-  width={220}
-  height={60}
-  priority
-  className="h-10 w-auto md:h-12"
-/>   
+            src="/monkscanner-logo-v2.svg"
+            alt="MonkScanner logo"
+            width={220}
+            height={60}
+            priority
+            className="h-11 w-auto object-contain md:h-12"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
+        <nav className="hidden items-center rounded-full border border-white/10 bg-white/[0.03] px-2 py-2 shadow-sm lg:flex">
           {navLinks.map((item, index) => (
             <Link
               key={item.href}
-              className={index === 0 ? "text-yellow-400" : ""}
               href={item.href}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                index === 0
+                  ? "bg-yellow-400 text-black"
+                  : "text-gray-200 hover:bg-white/10 hover:text-yellow-400"
+              }`}
             >
               {item.label}
             </Link>
@@ -46,35 +54,39 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button className="hidden rounded-full border border-white/10 px-3 py-2 text-sm md:block">
+          <button className="hidden rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-bold text-gray-100 transition hover:bg-white/10 md:block">
             🌐 EN
           </button>
 
           <button
             onClick={() => setOpen(!open)}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 lg:hidden"
+            className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.03] transition hover:bg-white/10 lg:hidden"
             aria-label="Toggle navigation menu"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#060b10] px-4 pb-5 lg:hidden">
+        <div className="border-t border-white/10 bg-[#05080d] px-4 pb-5 lg:hidden">
           <nav className="mx-auto grid max-w-7xl gap-2 pt-4">
-            {navLinks.map((item) => (
+            {navLinks.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-4 py-3 text-sm font-bold text-gray-200 hover:bg-white/5 hover:text-yellow-400"
+                className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
+                  index === 0
+                    ? "bg-yellow-400 text-black"
+                    : "text-gray-200 hover:bg-white/5 hover:text-yellow-400"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
 
-            <button className="mt-2 rounded-xl border border-white/10 px-4 py-3 text-left text-sm font-bold">
+            <button className="mt-2 rounded-2xl border border-white/10 px-4 py-3 text-left text-sm font-bold">
               🌐 EN
             </button>
           </nav>
