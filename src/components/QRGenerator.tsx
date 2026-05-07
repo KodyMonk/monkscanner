@@ -18,7 +18,6 @@ export default function QRGenerator() {
 
   const [selectedType, setSelectedType] = useState<QrType>("URL");
   const [activeTab, setActiveTab] = useState("Colors");
-
   const [selectedExport, setSelectedExport] = useState<"png" | "svg" | "pdf">("png");
 
   const [content, setContent] = useState("");
@@ -26,14 +25,14 @@ export default function QRGenerator() {
 
   const [foreground, setForeground] = useState("#111111");
   const [background, setBackground] = useState("#ffffff");
-  const [dotType, setDotType] = useState<DotType>("square");
+  const [dotType, setDotType] = useState<DotType>("rounded");
   const [cornerSquareType, setCornerSquareType] =
-    useState<CornerSquareType>("square");
-  const [cornerDotType, setCornerDotType] = useState<CornerDotType>("square");
-  const [margin, setMargin] = useState(10);
-  const [qrSize, setQrSize] = useState(300);
+    useState<CornerSquareType>("extra-rounded");
+  const [cornerDotType, setCornerDotType] = useState<CornerDotType>("dot");
+  const [margin, setMargin] = useState(12);
+  const [qrSize, setQrSize] = useState(800);
   const [errorCorrection, setErrorCorrection] =
-    useState<ErrorCorrectionLevel>("H");
+    useState<ErrorCorrectionLevel>("M");
   const [logoUrl, setLogoUrl] = useState<string>("");
 
   const [wifiSsid, setWifiSsid] = useState("");
@@ -138,7 +137,7 @@ export default function QRGenerator() {
       imageOptions: {
         crossOrigin: "anonymous",
         margin: 6,
-        imageSize: 0.25,
+        imageSize: 0.22,
         hideBackgroundDots: true,
       },
     });
@@ -175,6 +174,12 @@ export default function QRGenerator() {
         color: foreground,
         type: cornerDotType,
       },
+      imageOptions: {
+        crossOrigin: "anonymous",
+        margin: 6,
+        imageSize: 0.22,
+        hideBackgroundDots: true,
+      },
     });
   }, [
     generatedQrValue,
@@ -196,17 +201,18 @@ export default function QRGenerator() {
   function resetGenerator() {
     setSelectedType("URL");
     setActiveTab("Colors");
+    setSelectedExport("png");
     setContent("");
     setQrName("monkscanner-qr");
 
     setForeground("#111111");
     setBackground("#ffffff");
-    setDotType("square");
-    setCornerSquareType("square");
-    setCornerDotType("square");
-    setMargin(10);
-    setQrSize(300);
-    setErrorCorrection("H");
+    setDotType("rounded");
+    setCornerSquareType("extra-rounded");
+    setCornerDotType("dot");
+    setMargin(12);
+    setQrSize(800);
+    setErrorCorrection("M");
     setLogoUrl("");
 
     setWifiSsid("");
@@ -267,6 +273,12 @@ export default function QRGenerator() {
     pdf.save(`${safeFileName(qrName)}.pdf`);
 
     URL.revokeObjectURL(imageUrl);
+  }
+
+  function handleDownload() {
+    if (selectedExport === "png") downloadPNG();
+    if (selectedExport === "svg") downloadSVG();
+    if (selectedExport === "pdf") downloadPDF();
   }
 
   function handleLogoUpload(file?: File) {
@@ -402,41 +414,32 @@ export default function QRGenerator() {
             </p>
 
             <div className="mt-5 grid grid-cols-3 gap-2">
-  {[
-    { label: "PNG", value: "png" },
-    { label: "SVG", value: "svg" },
-    { label: "PDF", value: "pdf" },
-  ].map((format) => (
-    <button
-      key={format.value}
-      onClick={() => setSelectedExport(format.value as "png" | "svg" | "pdf")}
-      className={`rounded-xl border py-3 text-sm font-black transition ${
-        selectedExport === format.value
-          ? "border-yellow-400 bg-yellow-400 text-black shadow-sm"
-          : "border-gray-200 bg-white text-gray-700 hover:border-yellow-300 hover:bg-yellow-50 hover:text-yellow-700"
-      }`}
-    >
-      {format.label}
-    </button>
-  ))}
-</div>
-
-<button
-  onClick={() => {
-    if (selectedExport === "png") downloadPNG();
-    if (selectedExport === "svg") downloadSVG();
-    if (selectedExport === "pdf") downloadPDF();
-  }}
-  className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-400 px-5 py-4 font-black text-black transition hover:bg-yellow-300"
->
-  <Download size={18} /> Download {selectedExport.toUpperCase()}
-</button>
+              {[
+                { label: "PNG", value: "png" },
+                { label: "SVG", value: "svg" },
+                { label: "PDF", value: "pdf" },
+              ].map((format) => (
+                <button
+                  key={format.value}
+                  onClick={() =>
+                    setSelectedExport(format.value as "png" | "svg" | "pdf")
+                  }
+                  className={`rounded-xl border py-3 text-sm font-black transition ${
+                    selectedExport === format.value
+                      ? "border-yellow-400 bg-yellow-400 text-black shadow-sm"
+                      : "border-gray-200 bg-white text-gray-700 hover:border-yellow-300 hover:bg-yellow-50 hover:text-yellow-700"
+                  }`}
+                >
+                  {format.label}
+                </button>
+              ))}
+            </div>
 
             <button
-              onClick={downloadPNG}
+              onClick={handleDownload}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-400 px-5 py-4 font-black text-black transition hover:bg-yellow-300"
             >
-              <Download size={18} /> Download QR Code
+              <Download size={18} /> Download {selectedExport.toUpperCase()}
             </button>
           </div>
         </div>
@@ -494,14 +497,14 @@ export default function QRGenerator() {
               <RangeControl
                 label="Export Size"
                 value={qrSize}
-                min={200}
-                max={1200}
+                min={300}
+                max={2000}
                 onChange={setQrSize}
               />
               <RangeControl
                 label="Margin"
                 value={margin}
-                min={0}
+                min={8}
                 max={40}
                 onChange={setMargin}
               />
@@ -572,8 +575,8 @@ export default function QRGenerator() {
                 ]}
               />
               <p className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
-                Dot style changes the internal QR pattern. Always test scan after
-                heavy customization.
+                Dot style changes the internal QR pattern. For small print sizes,
+                rounded or square is safer than dots.
               </p>
             </div>
           )}
@@ -589,15 +592,15 @@ export default function QRGenerator() {
               <RangeControl
                 label="Margin"
                 value={margin}
-                min={0}
+                min={8}
                 max={40}
                 onChange={setMargin}
               />
               <RangeControl
                 label="Export Size"
                 value={qrSize}
-                min={200}
-                max={1200}
+                min={300}
+                max={2000}
                 onChange={setQrSize}
               />
             </div>
