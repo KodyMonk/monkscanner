@@ -17,6 +17,19 @@ type AuthorityPageProps = {
   faqs: { q: string; a: string }[];
 };
 
+const relatedResources = [
+  ["QR Code Examples", "/qr-code-examples"],
+  ["QR Code Use Cases", "/qr-code-use-cases"],
+  ["QR Code Size Guide", "/qr-code-size-guide"],
+  ["QR Code Design Guide", "/qr-code-design-guide"],
+  ["Business Card QR Code", "/business-card-qr-code"],
+  ["Restaurant QR Codes", "/restaurant-qr-codes"],
+  ["WiFi QR Code Guide", "/wifi-qr-code-guide"],
+  ["Packaging QR Codes", "/qr-code-for-packaging"],
+  ["Google Review QR Code", "/google-review-qr-code"],
+  ["WhatsApp Business QR Code", "/whatsapp-business-qr-code"],
+];
+
 export default function AuthorityPage({
   label,
   title,
@@ -78,6 +91,34 @@ export default function AuthorityPage({
                 </summary>
                 <p className="mt-4 leading-7 text-gray-600">{item.a}</p>
               </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-200 md:p-12">
+          <p className="text-sm font-black uppercase tracking-wide text-yellow-600">
+            Related QR Code Resources
+          </p>
+
+          <h2 className="mt-3 text-3xl font-black">
+            Helpful Guides to Continue Reading
+          </h2>
+
+          <p className="mt-4 leading-7 text-gray-600">
+            Explore related QR code guides for design, sizing, business use,
+            restaurants, packaging, reviews and WhatsApp customer chats.
+          </p>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {relatedResources.map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                className="flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-4 text-sm font-bold transition hover:border-yellow-300 hover:bg-yellow-50 hover:text-yellow-700"
+              >
+                {label}
+                <ArrowRight size={16} className="text-yellow-600" />
+              </Link>
             ))}
           </div>
         </section>
