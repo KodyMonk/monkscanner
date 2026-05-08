@@ -29,6 +29,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog/qr-code-for-flyers",
     "/blog/qr-code-for-events",
     "/blog/qr-code-marketing-guide",
+    "/qr-code-examples",
+    "/qr-code-use-cases",
+    "/qr-code-size-guide",
+    "/qr-code-design-guide",
+    "/business-card-qr-code",
+    "/restaurant-qr-codes",
+    "/wifi-qr-code-guide",
+    "/qr-code-for-packaging",
+    "/google-review-qr-code",
+    "/whatsapp-business-qr-code",
   ];
 
   return routes.map((route) => ({
