@@ -1,6 +1,7 @@
 import SEOPage from "@/components/SEOPage";
 
 export const metadata = {
+  alternates: { canonical: "/wifi-qr-code-generator" },
   title: "Free WiFi QR Code Generator | Share WiFi Easily",
   description:
     "Create a WiFi QR code for instant connection. No typing passwords. Generate and download for free.",

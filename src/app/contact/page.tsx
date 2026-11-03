@@ -1,6 +1,7 @@
 import SimplePage from "@/components/SimplePage";
 
 export const metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact MonkScanner | QR Code Generator Support",
   description:
     "Contact MonkScanner for feedback, support, suggestions and QR code generator feature requests.",

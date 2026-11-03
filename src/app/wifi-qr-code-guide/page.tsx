@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/wifi-qr-code-guide" },
   title: "WiFi QR Code Guide | Share WiFi Password with QR Codes",
   description:
     "Learn how WiFi QR codes work and how to share network access without typing passwords manually.",

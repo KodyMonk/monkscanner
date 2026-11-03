@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/qr-code-design-guide" },
   title: "QR Code Design Guide | Colors, Logos, Dots & Best Practices",
   description:
     "Learn how to design QR codes with colors, logos, dot styles and corners while keeping them scannable and professional.",

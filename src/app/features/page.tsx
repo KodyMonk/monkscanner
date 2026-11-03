@@ -1,6 +1,7 @@
 import SimplePage from "@/components/SimplePage";
 
 export const metadata = {
+  alternates: { canonical: "/features" },
   title: "QR Code Generator Features | MonkScanner",
   description:
     "Explore MonkScanner features including QR code customization, logo upload, colors, dot styles, eye styles and PNG, SVG and PDF downloads.",

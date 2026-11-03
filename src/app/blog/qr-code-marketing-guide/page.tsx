@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-marketing-guide" },
   title: "QR Code Marketing Guide | Ideas, Examples & Best Practices",
   description:
     "Learn how to use QR codes for marketing campaigns, flyers, posters, packaging, events, restaurants, social media and customer engagement.",

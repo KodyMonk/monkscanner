@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QRGenerator from "@/components/QRGenerator";
@@ -21,6 +22,10 @@ import {
   CalendarDays,
   Megaphone,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const qrTypes = [
   {

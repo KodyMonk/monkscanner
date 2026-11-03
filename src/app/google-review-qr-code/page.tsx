@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/google-review-qr-code" },
   title: "Google Review QR Code | Get More Customer Reviews",
   description:
     "Learn how to create a Google review QR code to help customers leave reviews for your business quickly.",

@@ -3,6 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://monkscanner.com"),
   title: "Free QR Code Generator Online | Create Custom QR Codes | MonkScanner",
   description:
     "Create free custom QR codes online with MonkScanner. Generate QR codes for URLs, WiFi, vCard, email, SMS, WhatsApp, menus, coupons and social media. Download PNG, SVG and PDF with no sign-up.",
@@ -29,7 +30,6 @@ export const metadata: Metadata = {
     description:
       "Generate custom QR codes for websites, WiFi, vCard, email, WhatsApp, menus and more. Free PNG, SVG and PDF downloads.",
     type: "website",
-    url: "https://monkscanner.com",
     siteName: "MonkScanner",
   },
   twitter: {
@@ -37,9 +37,6 @@ export const metadata: Metadata = {
     title: "Free QR Code Generator Online | MonkScanner",
     description:
       "Create free custom QR codes with logo, colors and high-quality downloads.",
-  },
-  alternates: {
-    canonical: "https://monkscanner.com",
   },
   icons: {
     icon: "/monkscanner-favicon.ico",

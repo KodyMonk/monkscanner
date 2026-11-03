@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-best-practices" },
   title: "QR Code Best Practices | Design, Size, Printing & Scanning Tips",
   description:
     "Learn QR code best practices for design, size, colors, logo placement, printing and scanning. Create QR codes that work reliably.",

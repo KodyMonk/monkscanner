@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-for-business" },
   title: "QR Codes for Business | Best Uses, Benefits & Examples",
   description:
     "Learn how businesses can use QR codes for marketing, menus, payments, contact sharing, product packaging, reviews and customer engagement.",

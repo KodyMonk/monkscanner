@@ -1,6 +1,7 @@
 import SEOPage from "@/components/SEOPage";
 
 export const metadata = {
+  alternates: { canonical: "/vcard-qr-code-generator" },
   title: "vCard QR Code Generator | Share Contact Instantly",
   description:
     "Create vCard QR codes for sharing contact details instantly. Perfect for business cards.",

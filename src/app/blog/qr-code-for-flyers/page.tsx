@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-for-flyers" },
   title: "QR Code for Flyers | How to Use QR Codes on Flyers",
   description:
     "Learn how to use QR codes on flyers for marketing, events, business promotion and campaigns. Create flyer QR codes for free.",

@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/qr-code-size-guide" },
   title: "QR Code Size Guide | Best QR Code Size for Print & Digital",
   description:
     "Learn the best QR code size for business cards, flyers, posters, menus, packaging and digital use. Improve QR code scan reliability.",

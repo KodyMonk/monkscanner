@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/qr-code-for-packaging" },
   title: "QR Code for Packaging | Product Labels, Instructions & Reviews",
   description:
     "Learn how to use QR codes on product packaging for instructions, reviews, videos, warranty pages, promotions and customer engagement.",

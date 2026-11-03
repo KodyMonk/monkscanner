@@ -1,6 +1,7 @@
 import SEOPage from "@/components/SEOPage";
 
 export const metadata = {
+  alternates: { canonical: "/menu-qr-code-generator" },
   title: "Menu QR Code Generator | Digital Restaurant Menus",
   description:
     "Create QR codes for restaurant menus. Share menu links or PDFs instantly with customers.",

@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-for-instagram" },
   title: "QR Code for Instagram | Create Instagram QR Code Free",
   description:
     "Create a QR code for Instagram profile, reels, posts or business pages. Free Instagram QR code generator with customization and PNG, SVG, PDF downloads.",

@@ -1,6 +1,7 @@
 import SEOPage from "@/components/SEOPage";
 
 export const metadata = {
+  alternates: { canonical: "/whatsapp-qr-code-generator" },
   title: "WhatsApp QR Code Generator | Chat Instantly",
   description:
     "Create WhatsApp QR codes to start chats instantly. Perfect for businesses and customer support.",

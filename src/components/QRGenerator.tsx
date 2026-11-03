@@ -9,7 +9,7 @@ import QRCodeStyling, {
 } from "qr-code-styling";
 import { jsPDF } from "jspdf";
 import { Download, Upload, RotateCcw, Wand2 } from "lucide-react";
-import { buildQRValue, safeFileName } from "@/lib/qr-utils";
+import { buildQRValue, contrastRatio, safeFileName } from "@/lib/qr-utils";
 import { QrType, qrTypes } from "@/lib/qr-data";
 
 export default function QRGenerator() {
@@ -54,6 +54,19 @@ export default function QRGenerator() {
   const [vWebsite, setVWebsite] = useState("");
 
   const selectedMeta = qrTypes.find((item) => item.name === selectedType);
+
+  // A logo covers ~22% of the code, so it needs the highest error correction (H, ~30%) to stay scannable.
+  const effectiveErrorCorrection: ErrorCorrectionLevel = logoUrl ? "H" : errorCorrection;
+
+  const contrast = contrastRatio(foreground, background);
+  const contrastWarning =
+    contrast === null
+      ? null
+      : contrast < 3
+      ? "Colors are too similar. Most phones will not be able to scan this QR code."
+      : contrastRatio(foreground, "#ffffff")! > contrastRatio(background, "#ffffff")!
+      ? "Light code on a dark background (inverted) does not scan on some phones. Dark on light is safest."
+      : null;
 
   const liveQrValue = useMemo(
     () =>
@@ -117,7 +130,7 @@ export default function QRGenerator() {
       image: logoUrl || undefined,
       margin,
       qrOptions: {
-        errorCorrectionLevel: errorCorrection,
+        errorCorrectionLevel: effectiveErrorCorrection,
       },
       dotsOptions: {
         color: foreground,
@@ -157,7 +170,7 @@ export default function QRGenerator() {
       image: logoUrl || undefined,
       margin,
       qrOptions: {
-        errorCorrectionLevel: errorCorrection,
+        errorCorrectionLevel: effectiveErrorCorrection,
       },
       dotsOptions: {
         color: foreground,
@@ -186,7 +199,7 @@ export default function QRGenerator() {
     qrSize,
     logoUrl,
     margin,
-    errorCorrection,
+    effectiveErrorCorrection,
     foreground,
     background,
     dotType,
@@ -257,7 +270,12 @@ export default function QRGenerator() {
     if (!raw) return;
 
     const blob = raw as Blob;
-    const imageUrl = URL.createObjectURL(blob);
+    const imageUrl = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
 
     const pdf = new jsPDF({
       orientation: "portrait",
@@ -271,8 +289,6 @@ export default function QRGenerator() {
     pdf.setFontSize(10);
     pdf.text("Generated with MonkScanner", 105, 175, { align: "center" });
     pdf.save(`${safeFileName(qrName)}.pdf`);
-
-    URL.revokeObjectURL(imageUrl);
   }
 
   function handleDownload() {
@@ -413,6 +429,15 @@ export default function QRGenerator() {
               Live preview. Export size: {qrSize}px.
             </p>
 
+            {contrastWarning && (
+              <p
+                role="alert"
+                className="mt-3 rounded-xl border border-red-200 bg-red-50 p-3 text-center text-xs font-bold text-red-700"
+              >
+                {contrastWarning}
+              </p>
+            )}
+
             <div className="mt-5 grid grid-cols-3 gap-2">
               {[
                 { label: "PNG", value: "png" },
@@ -446,8 +471,8 @@ export default function QRGenerator() {
       </div>
 
       <div className="mt-8 overflow-hidden rounded-2xl border border-gray-200">
-        <div className="grid grid-cols-3 border-b border-gray-200 md:grid-cols-7">
-          {["Colors", "Design", "Logo", "Frame", "Eyes", "Dots", "Options"].map(
+        <div className="grid grid-cols-3 border-b border-gray-200 md:grid-cols-6">
+          {["Colors", "Design", "Logo", "Eyes", "Dots", "Options"].map(
             (tab) => (
               <button
                 key={tab}
@@ -527,7 +552,9 @@ export default function QRGenerator() {
               <div>
                 <p className="text-sm font-bold">Logo Status</p>
                 <p className="mt-2 text-sm text-gray-500">
-                  {logoUrl ? "Logo uploaded." : "No logo uploaded yet."}
+                  {logoUrl
+                    ? "Logo uploaded. Error correction is set to H automatically so the code stays scannable."
+                    : "No logo uploaded yet."}
                 </p>
 
                 {logoUrl && (
@@ -583,12 +610,19 @@ export default function QRGenerator() {
 
           {activeTab === "Options" && (
             <div className="grid gap-6 md:grid-cols-3">
-              <SelectControl
-                label="Error Correction"
-                value={errorCorrection}
-                onChange={setErrorCorrection}
-                options={["L", "M", "Q", "H"]}
-              />
+              <div>
+                <SelectControl
+                  label="Error Correction"
+                  value={effectiveErrorCorrection}
+                  onChange={setErrorCorrection}
+                  options={["L", "M", "Q", "H"]}
+                />
+                {logoUrl && (
+                  <p className="mt-2 text-xs text-gray-500">
+                    Locked to H while a logo is added, so the code still scans.
+                  </p>
+                )}
+              </div>
               <RangeControl
                 label="Margin"
                 value={margin}
@@ -606,12 +640,6 @@ export default function QRGenerator() {
             </div>
           )}
 
-          {activeTab === "Frame" && (
-            <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
-              Frame designs like “Scan Me” borders will be added next. For now
-              the QR itself exports cleanly.
-            </div>
-          )}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/qr-code-examples" },
   title: "QR Code Examples | Practical QR Code Ideas for Business & Marketing",
   description:
     "Explore practical QR code examples for websites, menus, business cards, events, packaging, flyers, WiFi, WhatsApp and social media.",

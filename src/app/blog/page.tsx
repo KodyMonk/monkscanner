@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/blog" },
   title: "QR Code Blog | Guides, Tips & Marketing Ideas | MonkScanner",
   description:
     "Read QR code guides, marketing ideas, best practices and tutorials for business, restaurants, events, flyers, Instagram and more.",

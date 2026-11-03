@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/dynamic-qr-code-explained" },
   title: "Dynamic QR Code Explained | Static vs Dynamic QR Codes",
   description:
     "Learn what a dynamic QR code is, how it works, how it differs from static QR codes, and when businesses should use dynamic QR codes.",

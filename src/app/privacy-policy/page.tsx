@@ -1,6 +1,7 @@
 import SimplePage from "@/components/SimplePage";
 
 export const metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy | MonkScanner",
   description:
     "Read the MonkScanner privacy policy for our free online QR code generator.",

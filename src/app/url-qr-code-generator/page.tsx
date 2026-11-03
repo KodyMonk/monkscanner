@@ -1,6 +1,7 @@
 import SEOPage from "@/components/SEOPage";
 
 export const metadata = {
+  alternates: { canonical: "/url-qr-code-generator" },
   title: "Free URL QR Code Generator | Create QR Codes for Links",
   description:
     "Create a free URL QR code instantly. Generate QR codes for websites, landing pages and links. Download PNG, SVG or PDF.",

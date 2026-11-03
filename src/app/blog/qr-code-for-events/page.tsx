@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-for-events" },
   title: "QR Code for Events | Tickets, Check-In, Flyers & Promotions",
   description:
     "Learn how to use QR codes for events, tickets, check-in, event flyers, registrations, maps, schedules and promotions.",

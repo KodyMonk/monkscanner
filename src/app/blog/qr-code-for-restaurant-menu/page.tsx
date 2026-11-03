@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/qr-code-for-restaurant-menu" },
   title: "QR Code for Restaurant Menu | Digital Menu QR Generator",
   description:
     "Create QR codes for restaurant menus. Share digital menus using QR codes for cafes, bars and restaurants. Free generator with logo and customization.",

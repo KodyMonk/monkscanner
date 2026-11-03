@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
+  alternates: { canonical: "/qr-types" },
   title: "QR Code Types | URL, WiFi, vCard, WhatsApp & More | MonkScanner",
   description:
     "Explore QR code types including URL, WiFi, vCard, Email, SMS, WhatsApp, Menu, Instagram, Events, Flyers and more.",

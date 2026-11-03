@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/how-to-create-qr-code" },
   title: "How to Create a QR Code for Free | Step-by-Step Guide",
   description:
     "Learn how to create a QR code for free using MonkScanner. Step-by-step guide for URL, WiFi, vCard, WhatsApp, menu and business QR codes.",

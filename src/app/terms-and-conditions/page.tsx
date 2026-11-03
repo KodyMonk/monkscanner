@@ -1,6 +1,7 @@
 import SimplePage from "@/components/SimplePage";
 
 export const metadata = {
+  alternates: { canonical: "/terms-and-conditions" },
   title: "Terms and Conditions | MonkScanner",
   description:
     "Read the MonkScanner terms and conditions for using the free QR code generator.",

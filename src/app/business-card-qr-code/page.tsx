@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/business-card-qr-code" },
   title: "Business Card QR Code Guide | vCard QR Codes for Networking",
   description:
     "Learn how to use QR codes on business cards to share contact details, websites, portfolios, social profiles and vCards.",

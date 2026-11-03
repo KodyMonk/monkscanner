@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/restaurant-qr-codes" },
   title: "Restaurant QR Codes | Menus, Reviews, WiFi & Reservations",
   description:
     "Learn how restaurants use QR codes for digital menus, reviews, WiFi, reservations, ordering, offers and customer engagement.",

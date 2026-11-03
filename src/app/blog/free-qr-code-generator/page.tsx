@@ -1,6 +1,7 @@
 import BlogPage from "@/components/BlogPage";
 
 export const metadata = {
+  alternates: { canonical: "/blog/free-qr-code-generator" },
   title: "Free QR Code Generator (No Sign Up) | MonkScanner",
   description:
     "Create free QR codes instantly. No sign-up required. Customize colors, logo and download in PNG, SVG or PDF.",

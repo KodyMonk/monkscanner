@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/whatsapp-business-qr-code" },
   title: "WhatsApp Business QR Code | Start Customer Chats Faster",
   description:
     "Learn how WhatsApp Business QR codes help customers start chats for inquiries, bookings, support and sales.",

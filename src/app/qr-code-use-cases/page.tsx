@@ -1,6 +1,7 @@
 import AuthorityPage from "@/components/AuthorityPage";
 
 export const metadata = {
+  alternates: { canonical: "/qr-code-use-cases" },
   title: "QR Code Use Cases | Best Ways to Use QR Codes",
   description:
     "Discover the best QR code use cases for businesses, restaurants, events, marketing, education, packaging, WiFi and contact sharing.",

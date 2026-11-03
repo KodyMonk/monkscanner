@@ -1,6 +1,7 @@
 import SimplePage from "@/components/SimplePage";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
   title: "About MonkScanner | Free QR Code Generator",
   description:
     "MonkScanner is a free online QR code generator for creating custom QR codes with logo, colors and high-quality downloads.",
