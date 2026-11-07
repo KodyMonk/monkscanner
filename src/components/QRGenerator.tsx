@@ -249,27 +249,41 @@ export default function QRGenerator() {
     setGeneratedQrValue("https://monkscanner.com");
   }
 
-  function downloadPNG() {
-    qrCode.current?.download({
-      name: safeFileName(qrName),
-      extension: "png",
-    });
+  const [downloadError, setDownloadError] = useState("");
+  const [downloading, setDownloading] = useState(false);
+
+  // Save a Blob as a file. Blob URLs are more reliable than long data: URLs
+  // (Brave, Safari/iOS and some Chromium builds block or ignore those).
+  function saveBlob(blob: Blob, fileName: string) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    // Revoke later so the browser has time to start the download
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
   }
 
-  function downloadSVG() {
-    qrCode.current?.download({
-      name: safeFileName(qrName),
-      extension: "svg",
-    });
+  async function getQrBlob(extension: "png" | "svg") {
+    if (!qrCode.current) throw new Error("QR code is not ready yet");
+    const raw = await qrCode.current.getRawData(extension);
+    if (!raw) throw new Error("Could not render the QR code");
+    return raw as Blob;
+  }
+
+  async function downloadPNG() {
+    saveBlob(await getQrBlob("png"), `${safeFileName(qrName)}.png`);
+  }
+
+  async function downloadSVG() {
+    saveBlob(await getQrBlob("svg"), `${safeFileName(qrName)}.svg`);
   }
 
   async function downloadPDF() {
-    if (!qrCode.current) return;
-
-    const raw = await qrCode.current.getRawData("png");
-    if (!raw) return;
-
-    const blob = raw as Blob;
+    const blob = await getQrBlob("png");
     const imageUrl = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(String(reader.result));
@@ -281,20 +295,32 @@ export default function QRGenerator() {
       orientation: "portrait",
       unit: "mm",
       format: "a4",
+      compress: true,
     });
 
     pdf.setFontSize(18);
     pdf.text(qrName || "MonkScanner QR Code", 105, 25, { align: "center" });
-    pdf.addImage(imageUrl, "PNG", 45, 40, 120, 120);
+    pdf.addImage(imageUrl, "PNG", 45, 40, 120, 120, undefined, "FAST");
     pdf.setFontSize(10);
     pdf.text("Generated with MonkScanner", 105, 175, { align: "center" });
-    pdf.save(`${safeFileName(qrName)}.pdf`);
+    saveBlob(pdf.output("blob"), `${safeFileName(qrName)}.pdf`);
   }
 
-  function handleDownload() {
-    if (selectedExport === "png") downloadPNG();
-    if (selectedExport === "svg") downloadSVG();
-    if (selectedExport === "pdf") downloadPDF();
+  async function handleDownload() {
+    setDownloadError("");
+    setDownloading(true);
+    try {
+      if (selectedExport === "png") await downloadPNG();
+      if (selectedExport === "svg") await downloadSVG();
+      if (selectedExport === "pdf") await downloadPDF();
+    } catch (err) {
+      console.error("Download failed:", err);
+      setDownloadError(
+        "Download failed. Please try again, or try another format. If you use Brave, lowering Shields for this site can help."
+      );
+    } finally {
+      setDownloading(false);
+    }
   }
 
   function handleLogoUpload(file?: File) {
@@ -462,10 +488,21 @@ export default function QRGenerator() {
 
             <button
               onClick={handleDownload}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-400 px-5 py-4 font-black text-black transition hover:bg-yellow-300"
+              disabled={downloading}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-400 px-5 py-4 font-black text-black transition hover:bg-yellow-300 disabled:cursor-wait disabled:opacity-70"
             >
-              <Download size={18} /> Download {selectedExport.toUpperCase()}
+              <Download size={18} />{" "}
+              {downloading ? "Preparing…" : `Download ${selectedExport.toUpperCase()}`}
             </button>
+
+            {downloadError && (
+              <p
+                role="alert"
+                className="mt-3 rounded-xl border border-red-200 bg-red-50 p-3 text-center text-xs font-bold text-red-700"
+              >
+                {downloadError}
+              </p>
+            )}
           </div>
         </div>
       </div>
