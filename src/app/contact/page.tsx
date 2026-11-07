@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <SimplePage
       title="Contact MonkScanner"
-      subtitle="Have feedback, suggestions or feature requests? MonkScanner is currently in launch phase and we are improving the QR generator step by step."
+      subtitle="Have feedback, a bug to report or an idea for a new feature? Send us an email and we will get back to you."
       contact
       bullets={[
         "Feature requests",

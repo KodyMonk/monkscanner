@@ -12,11 +12,15 @@ import { Download, Upload, RotateCcw, Wand2 } from "lucide-react";
 import { buildQRValue, contrastRatio, safeFileName } from "@/lib/qr-utils";
 import { QrType, qrTypes } from "@/lib/qr-data";
 
-export default function QRGenerator() {
+export default function QRGenerator({
+  initialType = "URL",
+}: {
+  initialType?: QrType;
+} = {}) {
   const qrRef = useRef<HTMLDivElement | null>(null);
   const qrCode = useRef<QRCodeStyling | null>(null);
 
-  const [selectedType, setSelectedType] = useState<QrType>("URL");
+  const [selectedType, setSelectedType] = useState<QrType>(initialType);
   const [activeTab, setActiveTab] = useState("Colors");
   const [selectedExport, setSelectedExport] = useState<"png" | "svg" | "pdf">("png");
 
@@ -212,7 +216,7 @@ export default function QRGenerator() {
   }
 
   function resetGenerator() {
-    setSelectedType("URL");
+    setSelectedType(initialType);
     setActiveTab("Colors");
     setSelectedExport("png");
     setContent("");

@@ -8,6 +8,7 @@ type SimplePageProps = {
   subtitle: string;
   bullets: string[];
   contact?: boolean;
+  children?: React.ReactNode;
 };
 
 export default function SimplePage({
@@ -15,6 +16,7 @@ export default function SimplePage({
   subtitle,
   bullets,
   contact = false,
+  children,
 }: SimplePageProps) {
   return (
     <main className="min-h-screen bg-[#fbfbfc]">
@@ -44,6 +46,12 @@ export default function SimplePage({
                 </div>
               ))}
             </div>
+
+            {children && (
+              <div className="mt-10 space-y-4 text-gray-700 [&_a]:font-bold [&_a]:text-yellow-700 [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-gray-950 [&_li]:leading-7 [&_p]:leading-7 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
+                {children}
+              </div>
+            )}
 
             {contact && (
               <div className="mt-8 rounded-3xl border border-yellow-200 bg-yellow-50 p-6">
