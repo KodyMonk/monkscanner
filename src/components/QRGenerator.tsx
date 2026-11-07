@@ -268,8 +268,42 @@ export default function QRGenerator() {
   }
 
   async function getQrBlob(extension: "png" | "svg") {
-    if (!qrCode.current) throw new Error("QR code is not ready yet");
-    const raw = await qrCode.current.getRawData(extension);
+    // Build a fresh QR from the current settings for every download.
+    // qr-code-styling caches its PNG canvas after the first export and does not
+    // refresh it on update(), which made later downloads repeat an old QR.
+    const exporter = new QRCodeStyling({
+      width: qrSize,
+      height: qrSize,
+      type: extension === "svg" ? "svg" : "canvas",
+      data: liveQrValue || generatedQrValue,
+      image: logoUrl || undefined,
+      margin,
+      qrOptions: {
+        errorCorrectionLevel: effectiveErrorCorrection,
+      },
+      dotsOptions: {
+        color: foreground,
+        type: dotType,
+      },
+      backgroundOptions: {
+        color: background,
+      },
+      cornersSquareOptions: {
+        color: foreground,
+        type: cornerSquareType,
+      },
+      cornersDotOptions: {
+        color: foreground,
+        type: cornerDotType,
+      },
+      imageOptions: {
+        crossOrigin: "anonymous",
+        margin: 6,
+        imageSize: 0.22,
+        hideBackgroundDots: true,
+      },
+    });
+    const raw = await exporter.getRawData(extension);
     if (!raw) throw new Error("Could not render the QR code");
     return raw as Blob;
   }
